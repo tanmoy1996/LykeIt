@@ -48,6 +48,9 @@ export default {
   .opacity-50{
     opacity: 0.5;
   }
+  .no-outline{
+    outline:none;
+  }
 </style>
 <style scoped>
 .text-dec{

@@ -1,56 +1,18 @@
 <template>
   <v-card height="100%" :dark="dark" flat class="transparent d-flex align-center">
-    <div class="d-flex pa-15">
+    <div class="d-flex pa-15 no-outline" @keypress="key($event)" tabindex="0">
       <span class="mr-1">{{no}}.</span>
       <div>
         <p class="text-work-san f-24"> {{question}} 
           <span v-if="required">*</span>
         </p>
         <p class="text-work-san f-20 opacity-50"> {{questionDesc}} </p>
-        <div v-if="bool">
-          <v-col v-for="(option,idx) of opt"
-          cols="5"
-          :key="idx"
-          class="option pa-0 ma-3"
-          :class="selected==idx?'blink':null"
-          @click="selectAns(idx)">
-            <v-card outlined class="transparent">
-              <!-- keyboard option -->
-              <div class="d-flex ma-2 mt-3">
-                <v-card flat class="transparent px-2 mr-2 rounded-sm keyboard">
-                  <b class="text-work-san f-16">{{option.charAt(0)}}</b>
-                </v-card>
-                <p class="text-work-san f-16 mb-0">{{option}}</p>
-              </div>
-            </v-card>
-            <div v-if="selected==idx" class="d-flex align-start justify-end selected">
-              <v-icon color="black">mdi-check</v-icon>
-            </div>
-          </v-col>
-        </div>
-        <div v-else-if="parseInt(range)>0 && parseInt(range)<=36"
-          class="d-flex flex-wrap ">
-          <div v-for="i of parseInt(range)"
-          :key="i"
-          class="range pa-0 ma-3"
-          :class="selected==i?'rangeSelected blink':null"
-          @click="selectAns(i)">
-            <p class="text-work-san f-16 mb-0">{{i}}</p>
-          </div>
-        </div>
-        <div v-else-if="parseInt(range)>0 && parseInt(range)>36"
-          class="d-flex flex-wrap ">
-          <p class="text-work-san f-16 mb-0">
-            The range should be less than 36
-          </p>
-        </div>
-        <div v-else-if="options.length==2" 
-        class="space-around"
-        :class="options[0].pic?'d-flex':null">
+        <div v-if="options.length==2" 
+        class="space-around d-flex">
           <v-col cols="5" v-for="(option,idx) of options" 
           :key="idx" 
           class="option pa-0 ma-3"
-          :class="selected==idx?'blink':null"
+          :class="singleSelect==idx?'blink':null"
           @click="selectAns(idx)">
             <v-card outlined class="transparent">
               <div class="d-flex align-center justify-center">
@@ -64,17 +26,68 @@
                 <p class="text-work-san f-16 mb-0" v-text="option.name"></p>
               </div>
             </v-card>
-            <div v-if="selected==idx" class="d-flex align-start justify-end selected">
+            <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)" 
+            class="d-flex align-start justify-end selected">
               <v-icon color="black">mdi-check</v-icon>
             </div>
           </v-col>
         </div>
-        <div v-else-if="options.length>2 && options.length<=6" 
+        <div v-else-if="options.length==3" 
+        class="space-around d-flex">
+          <v-col cols="4" v-for="(option,idx) of options" 
+          :key="idx" 
+          class="option pa-0 ma-3"
+          :class="singleSelect==idx?'blink':null"
+          @click="selectAns(idx)">
+            <v-card outlined class="transparent">
+              <div class="d-flex align-center justify-center">
+                <img :src="option.pic" width="50%"/>
+              </div>
+              <!-- keyboard option -->
+              <div class="d-flex ma-2">
+                <v-card flat class="white black--text px-2 mr-2 rounded-sm">
+                  <b class="text-work-san f-16">{{String.fromCharCode(65+idx)}}</b>
+                </v-card>
+                <p class="text-work-san f-16 mb-0" v-text="option.name"></p>
+              </div>
+            </v-card>
+            <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)"
+              class="d-flex align-start justify-end selected">
+              <v-icon color="black">mdi-check</v-icon>
+            </div>
+          </v-col>
+        </div>
+        <div v-else-if="options.length>3 && options.length<=8 && !options[0].pic"
+          class="d-flex flex-wrap">
+          <v-col cols="5" v-for="(option,idx) of options" 
+          :key="idx" 
+          class="option pa-0 ma-3"
+          :class="singleSelect==idx?'blink':null"
+          @click="selectAns(idx)">
+            <v-card outlined class="transparent">
+              <div class="d-flex align-center justify-center">
+                <img :src="option.pic" width="50%"/>
+              </div>
+              <!-- keyboard option -->
+              <div class="d-flex ma-2">
+                <v-card flat class="white black--text px-2 mr-2 rounded-sm">
+                  <b class="text-work-san f-16">{{String.fromCharCode(65+idx)}}</b>
+                </v-card>
+                <p class="text-work-san f-16 mb-0" v-text="option.name"></p>
+              </div>
+            </v-card>
+            <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)"
+            class="d-flex align-start justify-end selected">
+              <v-icon color="black">mdi-check</v-icon>
+            </div>
+          </v-col>
+        </div>
+        <div v-else-if="options.length>3 && options.length<=8" 
         class="d-flex flex-wrap space-around">
           <div v-for="(option,idx) of options" 
           :key="idx" 
           class="option pa-0 ma-3"
-          :class="selected==idx?'blink':null"
+          :class="singleSelect==idx?'blink':null"
           @click="selectAns(idx)">
             <v-card outlined class="transparent">
               <div class="d-flex align-center justify-center">
@@ -88,12 +101,13 @@
                 <p class="text-work-san f-16 mb-0" v-text="option.name"></p>
               </div>
             </v-card>
-            <div v-if="selected==idx" class="d-flex align-start justify-end selected">
+            <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)" 
+            class="d-flex align-start justify-end selected">
               <v-icon color="black">mdi-check</v-icon>
             </div>
           </div>
         </div>
-        <div v-else-if="options.length>6">
+        <div v-else-if="options.length>8">
           <v-autocomplete
             :items="options"
             item-text="name"
@@ -102,10 +116,11 @@
             :multiple="multiple"
           ></v-autocomplete>
         </div>
-          <v-btn :light="dark" :dark="!dark" class="mt-3">
-            OK
-            <v-icon right>mdi-check</v-icon>
-          </v-btn>
+        <!-- btn -->
+        <v-btn :light="dark" :dark="!dark" class="mt-3">
+          OK
+          <v-icon right>mdi-check</v-icon>
+        </v-btn>
       </div>
     </div>
   </v-card>
@@ -115,20 +130,11 @@
 export default {
   name:"Mcq",
   props:{
+    value:[String, Array],
     no: String,
-    range: String,
     question: String,
     questionDesc: String,
-    options: {
-      type: Array,
-      default(){
-        return [];
-      },
-    },
-    bool: {
-      type: Boolean,
-      default: false,
-    },
+    options: Array,
     dark: {
       type: Boolean,
       default: false,
@@ -144,18 +150,38 @@ export default {
   },
   data(){
     return{
-      selected:-1,
-      opt:['True','False'],
+      selected:[],
+      singleSelect:-1,
     }
   },
   methods:{
     selectAns(idx){
-      if(this.selected==idx){
-        this.selected=-1;
+      if(this.selected.includes(idx)){
+        var i = this.selected.indexOf(idx);
+        this.selected.splice(i,1);
       }
       else{
-        this.selected=idx;
+        this.selected.push(idx);
       }
+      if(this.singleSelect==idx){
+        this.singleSelect=-1
+      }
+      else{
+        this.singleSelect=idx
+      }
+      if(this.multiple){
+        this.updateValue(`${this.selected}`)
+      }
+      else{
+        this.updateValue(`${this.singleSelect}`)
+      }
+    },
+    key(e) {
+      var keyPressed  = (e.keyCode<=90?e.keyCode+32:e.keyCode)-97;
+      this.selectAns(keyPressed);
+    },
+    updateValue(value){
+      this.$emit('input',value);
     }
   }
 }

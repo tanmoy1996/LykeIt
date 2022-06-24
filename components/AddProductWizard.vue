@@ -6,139 +6,168 @@
     :value="completed()"/>
     <v-card id="questions"
       height="100%" flat class="transparent">
-      <Short class="q"
-        no="1"
-        question="Okay. How exactly are you using it?"
-        questionDesc="What personal need is it solving? How is is helping?" 
-        dark
-        required/>
-      <Rating class="q"
-      no="2"
+      
+      <!-- <Rating class="q" no="4"
       question="How was your expirence"
       questionDesc="What personal need is it solving? How is is helping?" 
-      dark/>
-      <Mcq class="q"
-        no="3"
-        question="First off, are you using the product for business or personal use?" 
-        :options="[{
-          pic:'/_nuxt/assets/home.png',
-          name:'Personal',
-          value:'personal',
-          },{
-          pic:'/_nuxt/assets/building.png',
-          name:'Business',
-          value:'business',
-        },]"
-        dark
-        required/> 
-      <Mcq class="q"
-        no="4"
-        question="You are daily using our product." 
-        bool
-        dark
-        required/>
-      <Mcq class="q"
-      no="5"
+      dark/> -->
+      <!-- <Range class="q" no="5" 
+      question="First off, are you using the product for business or personal use?" 
+      range="5"
+      dark
+      required/> -->
+      <!-- <Bool class="q" no="3" 
+      question="You are daily using our product." 
+      dark
+      required/> -->
+      <Mcq class="q" no="7" v-model="q2"
       question="First off, are you using the product for business or personal use?" 
       :options="[{
         pic:'/_nuxt/assets/home.png',
-        name:'Option1',
-        value:'Option1',
+        name:'Personal',
+        value:'personal',
         },{
-        pic:'/_nuxt/assets/home.png',
-        name:'Option2',
-        value:'Option2',
-      },{
-        pic:'/_nuxt/assets/home.png',
-        name:'Option3',
-        value:'Option3',
-      },{
-        pic:'/_nuxt/assets/home.png',
-        name:'Option4',
-        value:'Option4',
-      },{
-        pic:'/_nuxt/assets/home.png',
-        name:'Option5',
-        value:'Option5',
+        pic:'/_nuxt/assets/building.png',
+        name:'Business',
+        value:'business',
+      },]"
+      dark
+      multiple
+      required/> 
+      <Short class="q" no="1" v-model="q1"
+      question="Okay. How exactly are you using it?"
+      questionDesc="What personal need is it solving? How is is helping?" 
+      dark
+      required/>
+      <!-- 
+      <Short class="q" no="2"
+      question="Okay. How exactly are you using it?"
+      questionDesc="What personal need is it solving? How is is helping?" 
+      dark
+      email
+      required/>
+      <Range class="q" no="6"
+      question="First off, are you using the product for business or personal use?" 
+      range="36"
+      dark
+      required/>
+      
+      <Mcq class="q" no="8"
+      question="First off, are you using the product for business or personal use?" 
+      :options="[{
+        pic:require('@/assets/home.png'),
+        name:'Personal',
+        value:'personal',
         },{
-        pic:'/_nuxt/assets/home.png',
-        name:'Option6',
-        value:'Option6',
+        pic:require('@/assets/building.png'),
+        name:'Business',
+        value:'business',
       },{
-        pic:'/_nuxt/assets/home.png',
-        name:'Option7',
-        value:'Option7',
+        pic:require('@/assets/home.png'),
+        name:'Personal',
+        value:'personal',
+        },{
+        pic:require('@/assets/building.png'),
+        name:'Business',
+        value:'business',
       },{
-        pic:'/_nuxt/assets/home.png',
-        name:'Option8',
-        value:'Option8',
+        pic:require('@/assets/building.png'),
+        name:'Business',
+        value:'business',
+      },{
+        pic:require('@/assets/building.png'),
+        name:'Business',
+        value:'business',
       }]"
       dark
       required/>
-      <Mcq class="q"
-      no="6"
+      <Mcq class="q" no="9"
       question="First off, are you using the product for business or personal use?" 
       :options="[{
+        pic:'/_nuxt/assets/home.png',
         name:'Option1',
         value:'Option1',
         },{
+        pic:'/_nuxt/assets/home.png',
         name:'Option2',
         value:'Option2',
       },{
+        pic:'/_nuxt/assets/home.png',
         name:'Option3',
         value:'Option3',
       },{
+        pic:'/_nuxt/assets/home.png',
         name:'Option4',
         value:'Option4',
       },{
+        pic:'/_nuxt/assets/home.png',
         name:'Option5',
         value:'Option5',
         },{
+        pic:'/_nuxt/assets/home.png',
         name:'Option6',
         value:'Option6',
       },{
+        pic:'/_nuxt/assets/home.png',
         name:'Option7',
         value:'Option7',
       },{
+        pic:'/_nuxt/assets/home.png',
         name:'Option8',
         value:'Option8',
       },{
-        name:'Option1',
-        value:'Option1',
-        },{
-        name:'Option2',
-        value:'Option2',
-      },{
-        name:'Option3',
-        value:'Option3',
-      },{
-        name:'Option4',
-        value:'Option4',
-      },{
-        name:'Option5',
-        value:'Option5',
-        },{
-        name:'Option6',
-        value:'Option6',
-      },{
-        name:'Option7',
-        value:'Option7',
-      },{
-        name:'Option8',
-        value:'Option8',
-      },{
+        pic:'/_nuxt/assets/home.png',
         name:'Option9',
         value:'Option9',
       }]"
       dark
-      multiple
       required/>
-      <Mcq class="q"
-        no="7"
-        question="First off, are you using the product for business or personal use?" 
-        range="10"
-        dark
-        required/>
+      <Mcq class="q" no="10"
+      question="First off, are you using the product for business or personal use?" 
+      :options="[{
+        name:'Personal',
+        value:'personal',
+        },{
+        name:'Business',
+        value:'business',
+      },{
+        name:'Personal',
+        value:'personal',
+        },{
+        name:'Business',
+        value:'business',
+      },]"
+      dark
+      required/> 
+      <Mcq class="q" no="11" multiple
+      question="First off, are you using the product for business or personal use?" 
+      :options="[{
+        name:'Option1',
+        value:'Option1',
+        },{
+        name:'Option2',
+        value:'Option2',
+      },{
+        name:'Option3',
+        value:'Option3',
+      },{
+        name:'Option4',
+        value:'Option4',
+      },{
+        name:'Option5',
+        value:'Option5',
+        },{
+        name:'Option6',
+        value:'Option6',
+      },{
+        name:'Option7',
+        value:'Option7',
+      },{
+        name:'Option8',
+        value:'Option8',
+      }]"
+      dark
+      required/> -->
     </v-card>
     <div id="moveBtn">
       <div class="absBtn">
@@ -165,12 +194,17 @@
 import Short from './questions/Short.vue';
 import Rating from './questions/Rating.vue';
 import Mcq from './questions/Mcq.vue';
+import Bool from './questions/Bool.vue';
+import Range from './questions/Range.vue';
+
 
 export default {
     name: "AddProduct",
-    components: { Short, Rating, Mcq },
+    components: { Short, Rating, Mcq, Bool, Range},
     data() {
         return {
+            q1:'',
+            q2:'',
             step:0,
             questionNos:10,
         };
@@ -179,19 +213,20 @@ export default {
       completed(){
         return (this.step/this.questionNos*100);
       },
-        next(go) {
-          var el = document.querySelector('#questions');
-          var questions = el.querySelectorAll('.q')
-          this.questionNos=questions.length;
-          if(go){
-            questions[this.step].classList.toggle('hideStep');
-            this.step++;
-          }
-          else{
-            this.step--;
-            questions[this.step].classList.toggle('hideStep');
-          }        
+      next(go) {
+        var el = document.querySelector('#questions');
+        var questions = el.querySelectorAll('.q')
+        this.questionNos=questions.length;
+        if(go){
+          questions[this.step].classList.toggle('hideStep');
+          this.step++;
         }
+        else{
+          this.step--;
+          questions[this.step].classList.toggle('hideStep');
+        }  
+          console.log("q2", this.q2);   
+      },
     },
     
 }

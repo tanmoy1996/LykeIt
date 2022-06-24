@@ -8,9 +8,11 @@
         </p>
         <p class="text-work-san f-20 opacity-50"> {{questionDesc}} </p>
         <v-text-field 
-        :dark="dark" 
+        :dark="dark"
         :placeholder="email?'name@example.com':'Type your answer here...'" 
-        class="text-work-san answer"/>
+        class="text-work-san answer"
+        :value="value"
+        @input="updateValue($event)"/>
         <div class="d-flex  align-center">
           <v-btn :light="dark" :dark="!dark" class="mr-2">
             OK
@@ -29,6 +31,7 @@
 export default {
   name:"Short",
   props:{
+    value:String,
     no: String,
     question: String,
     questionDesc: String,
@@ -43,6 +46,16 @@ export default {
     required: {
       type: Boolean,
       default: false
+    }
+  },
+  data(){
+    return{
+      ans:'',
+    }
+  },
+  methods:{
+    updateValue(value){
+      this.$emit('input',value);
     }
   }
 }
