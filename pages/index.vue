@@ -4,7 +4,7 @@
     <v-card-text v-if="addNewProduct"
     flat
     class="pa-0">
-    <AddProduct/>
+    <AddProduct :background="require('@/assets/lightBack.svg')"/>
     </v-card-text>
     <v-card-text v-else-if="!addNewProduct && !products.length>0"
     flat
@@ -28,13 +28,20 @@
         v-for="product in products" :key="product.id">
             <ProductCard :product="product"/>
         </v-col>
+        <v-col 
+        cols sm="6" md="4" lg="3" class="mt-14">
+        <v-card dark class="fill-height grad py-15" 
+        @click="addNewProduct=true">
+          <h2 class="text-center">Add Products</h2>
+        </v-card>
+        </v-col>
       </v-row>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
-import AddProduct from "../components/AddProductWizard.vue";
+import AddProduct from "~/components/Wizard.vue";
 import ProductCard from "~/components/ProductCard.vue";
 export default {
     layout: "InAppLayout",

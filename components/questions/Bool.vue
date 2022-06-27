@@ -1,6 +1,6 @@
 <template>
   <v-card height="100%" :dark="dark" flat class="transparent d-flex align-center">
-    <div class="d-flex pa-15 no-outline" @keypress="key($event)" tabindex="0">
+    <div class="d-flex pa-md-15 pa-5 no-outline" @keypress="key($event)" tabindex="0">
       <span class="mr-1">{{no}}.</span>
       <div>
         <p class="text-work-san f-24"> {{question}} 
@@ -12,23 +12,24 @@
           cols="5"
           :key="idx"
           class="option pa-0 ma-3"
-          :class="selected==idx?'blink':null"
+          :class="`${selected==idx?'blink':null} option${dark?'Dark':'Light'}`"
           @click="selectAns(idx)">
             <v-card outlined class="transparent">
               <!-- keyboard option -->
               <div class="d-flex ma-2 mt-3">
-                <v-card flat class="transparent px-2 mr-2 rounded-sm keyboard">
+                <v-card v-if="keyboardSelect" flat class="transparent px-2 mr-2 rounded-sm keyboard">
                   <b class="text-work-san f-16">{{option.charAt(0)}}</b>
                 </v-card>
                 <p class="text-work-san f-16 mb-0">{{option}}</p>
               </div>
             </v-card>
-            <div v-if="selected==idx" class="d-flex align-start justify-end selected">
-              <v-icon color="black">mdi-check</v-icon>
+            <div v-if="selected==idx" class="d-flex align-start justify-end selected"
+            :class="dark?'white':'grey darken-4'">
+              <v-icon :color="dark?'black':'white'">mdi-check</v-icon>
             </div>
           </div>
         </div>
-          <v-btn :light="dark" :dark="!dark" class="mt-3">
+          <v-btn :light="dark" :dark="!dark" class="mt-3" @click="$emit('next');">
             OK
             <v-icon right>mdi-check</v-icon>
           </v-btn>
@@ -45,6 +46,10 @@ export default {
     no: String,
     question: String,
     questionDesc: String,
+    keyboardSelect:{
+      type: Boolean,
+      default: false,
+    },
     dark: {
       type: Boolean,
       default: false,
@@ -69,6 +74,7 @@ export default {
         this.selected=idx;
       }
       this.updateValue(this.selected==0)
+      setTimeout(()=>{this.$emit('next')}, 1000);
     },
     key(e) {
       if(e.key.toLowerCase()=='t'){
@@ -87,13 +93,19 @@ export default {
 
 <style scoped>
 .option{
-  border: 2px solid white;
   border-radius: 5px;
   position: relative;
   min-height:50px;
   min-width: 15vw;
   max-width: 20vw;
+  cursor: pointer;
   transition: all 100ms ease-in-out;
+}
+.optionLight{
+  border: 2px solid rgb(65, 65, 65);
+}
+.optionDark{
+  border: 2px solid white;
 }
 .selected{
   top:-1px;
@@ -102,7 +114,6 @@ export default {
   width: 48px;
   border-radius: 5px;
   position: absolute;
-  background: white;
   clip-path: polygon(0% 0, 100% 0, 100% 100%);
 }
 .f-16{
@@ -132,6 +143,12 @@ export default {
   }
   66% {
     border: 2px solid white;
+  }
+}
+
+@media (max-width: 480px) {
+  .option{
+  min-width: 50vw;
   }
 }
 </style>

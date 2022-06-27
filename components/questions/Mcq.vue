@@ -1,6 +1,6 @@
 <template>
   <v-card height="100%" :dark="dark" flat class="transparent d-flex align-center">
-    <div class="d-flex pa-15 no-outline" @keypress="key($event)" tabindex="0">
+    <div class="d-flex pa-md-15 pa-5 no-outline" @keypress="key($event)" tabindex="0">
       <span class="mr-1">{{no}}.</span>
       <div>
         <p class="text-work-san f-24"> {{question}} 
@@ -11,8 +11,8 @@
         class="space-around d-flex">
           <v-col cols="5" v-for="(option,idx) of options" 
           :key="idx" 
-          class="option pa-0 ma-3"
-          :class="singleSelect==idx?'blink':null"
+          class="option pa-0 ma-md-3 mr-2"
+          :class="`${selected==idx?'blink':''} option${dark?'Dark':'Light'}`"
           @click="selectAns(idx)">
             <v-card outlined class="transparent">
               <div class="d-flex align-center justify-center">
@@ -20,24 +20,24 @@
               </div>
               <!-- keyboard option -->
               <div class="d-flex ma-2">
-                <v-card flat class="white black--text px-2 mr-2 rounded-sm">
+                <v-card v-if="keyboardSelect" flat class="white black--text px-2 mr-2 rounded-sm">
                   <b class="text-work-san f-16">{{String.fromCharCode(65+idx)}}</b>
                 </v-card>
                 <p class="text-work-san f-16 mb-0" v-text="option.name"></p>
               </div>
             </v-card>
-            <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)" 
-            class="d-flex align-start justify-end selected">
-              <v-icon color="black">mdi-check</v-icon>
+            <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)"
+              class="d-flex align-start justify-end selected" :class="dark?'white':'grey darken-4'">
+              <v-icon :color="dark?'black':'white'">mdi-check</v-icon>
             </div>
           </v-col>
         </div>
         <div v-else-if="options.length==3" 
-        class="space-around d-flex">
+        class="space-around d-flex ml-md-0 ml-n5">
           <v-col cols="4" v-for="(option,idx) of options" 
           :key="idx" 
-          class="option pa-0 ma-3"
-          :class="singleSelect==idx?'blink':null"
+          class="option pa-0 ma-md-3 mr-1"
+          :class="`${selected==idx?'blink':''} option${dark?'Dark':'Light'}`"
           @click="selectAns(idx)">
             <v-card outlined class="transparent">
               <div class="d-flex align-center justify-center">
@@ -45,24 +45,24 @@
               </div>
               <!-- keyboard option -->
               <div class="d-flex ma-2">
-                <v-card flat class="white black--text px-2 mr-2 rounded-sm">
+                <v-card v-if="keyboardSelect" flat class="white black--text px-2 mr-2 rounded-sm">
                   <b class="text-work-san f-16">{{String.fromCharCode(65+idx)}}</b>
                 </v-card>
                 <p class="text-work-san f-16 mb-0" v-text="option.name"></p>
               </div>
             </v-card>
             <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)"
-              class="d-flex align-start justify-end selected">
-              <v-icon color="black">mdi-check</v-icon>
+              class="d-flex align-start justify-end selected" :class="dark?'white':'grey darken-4'">
+              <v-icon :color="dark?'black':'white'">mdi-check</v-icon>
             </div>
           </v-col>
         </div>
-        <div v-else-if="options.length>3 && options.length<=8 && !options[0].pic"
-          class="d-flex flex-wrap">
+        <div v-else-if="options.length>3 && options.length<=6 && !options[0].pic"
+          class="d-flex flex-wrap ml-n5 ml-md-0">
           <v-col cols="5" v-for="(option,idx) of options" 
           :key="idx" 
-          class="option pa-0 ma-3"
-          :class="singleSelect==idx?'blink':null"
+          class="option pa-0 ma-md-3 mr-1 mb-1 "
+          :class="`${selected==idx?'blink':''} option${dark?'Dark':'Light'}`"
           @click="selectAns(idx)">
             <v-card outlined class="transparent">
               <div class="d-flex align-center justify-center">
@@ -70,24 +70,24 @@
               </div>
               <!-- keyboard option -->
               <div class="d-flex ma-2">
-                <v-card flat class="white black--text px-2 mr-2 rounded-sm">
+                <v-card v-if="keyboardSelect" flat class="white black--text px-2 mr-2 rounded-sm">
                   <b class="text-work-san f-16">{{String.fromCharCode(65+idx)}}</b>
                 </v-card>
                 <p class="text-work-san f-16 mb-0" v-text="option.name"></p>
               </div>
             </v-card>
             <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)"
-            class="d-flex align-start justify-end selected">
-              <v-icon color="black">mdi-check</v-icon>
+            class="d-flex align-start justify-end selected" :class="dark?'white':'grey darken-4'">
+              <v-icon :color="dark?'black':'white'">mdi-check</v-icon>
             </div>
           </v-col>
         </div>
-        <div v-else-if="options.length>3 && options.length<=8" 
+        <div v-else-if="options.length>3 && options.length<=6" 
         class="d-flex flex-wrap space-around">
           <div v-for="(option,idx) of options" 
           :key="idx" 
-          class="option pa-0 ma-3"
-          :class="singleSelect==idx?'blink':null"
+          class="option pa-0 ma-md-3 mr-1 mb-1"
+          :class="`${selected==idx?'blink':''} option${dark?'Dark':'Light'}`"
           @click="selectAns(idx)">
             <v-card outlined class="transparent">
               <div class="d-flex align-center justify-center">
@@ -95,19 +95,19 @@
               </div>
               <!-- keyboard option -->
               <div class="d-flex ma-2">
-                <v-card flat class="white black--text px-2 mr-2 rounded-sm">
+                <v-card v-if="keyboardSelect" flat class="white black--text px-2 mr-2 rounded-sm">
                   <b class="text-work-san f-16">{{String.fromCharCode(65+idx)}}</b>
                 </v-card>
                 <p class="text-work-san f-16 mb-0" v-text="option.name"></p>
               </div>
             </v-card>
             <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)" 
-            class="d-flex align-start justify-end selected">
-              <v-icon color="black">mdi-check</v-icon>
+            class="d-flex align-start justify-end selected" :class="dark?'white':'grey darken-4'">
+              <v-icon :color="dark?'black':'white'">mdi-check</v-icon>
             </div>
           </div>
         </div>
-        <div v-else-if="options.length>8">
+        <div v-else-if="options.length>6">
           <v-autocomplete
             :items="options"
             item-text="name"
@@ -117,7 +117,7 @@
           ></v-autocomplete>
         </div>
         <!-- btn -->
-        <v-btn :light="dark" :dark="!dark" class="mt-3">
+        <v-btn :light="dark" :dark="!dark" class="mt-3" @click="$emit('next');">
           OK
           <v-icon right>mdi-check</v-icon>
         </v-btn>
@@ -135,6 +135,10 @@ export default {
     question: String,
     questionDesc: String,
     options: Array,
+    keyboardSelect:{
+      type: Boolean,
+      default: false,
+    },
     dark: {
       type: Boolean,
       default: false,
@@ -195,34 +199,20 @@ export default {
   padding: 10px 0;
 }
 .option{
-  border: 2px solid white;
   border-radius: 5px;
   position: relative;
-  min-height:50px;
   min-width: 15vw;
+  max-width: 30vw;
   transition: all 100ms ease-in-out;
+}
+.optionLight{
+  border: 2px solid rgb(65, 65, 65);
+}
+.optionDark{
+  border: 2px solid white;
 }
 .option img{
   max-width:200px;
-}
-.range{
-  border: 1px solid white;
-  border-radius: 5px;
-  width:70px;
-  height:70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.range:hover{
-  background: rgba(255, 255, 255, 0.25);
-}
-.rangeSelected{
-  background: rgb(255, 255, 255);
-  color:black;
-}
-.range>p{
-  font-size: 28px;
 }
 .selected{
   top:-1px;
@@ -231,11 +221,14 @@ export default {
   width: 48px;
   border-radius: 5px;
   position: absolute;
-  background: white;
   clip-path: polygon(0% 0, 100% 0, 100% 100%);
 }
 .f-16{
   font-size: 16px;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .blink {
   animation: blinker 500ms linear 2;
@@ -261,6 +254,18 @@ export default {
   }
   66% {
     border: 2px solid white;
+  }
+}
+
+@media (max-width: 480px) {
+  .answer{
+  font-size:16px;
+  }
+  .f-16{
+  font-size:12px;
+  }
+  option{
+    max-width:30vw;
   }
 }
 </style>

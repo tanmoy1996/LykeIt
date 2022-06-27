@@ -1,6 +1,6 @@
 <template>
   <v-card height="100%" flat :dark="dark" class="transparent d-flex align-center">
-    <div class="d-flex pa-15">
+    <div class="d-flex pa-md-15 pa-5">
       <span class="mr-1">{{no}}.</span>
       <div>
         <p class="text-work-san f-24"> {{question}} 
@@ -14,13 +14,10 @@
         :value="value"
         @input="updateValue($event)"/>
         <div class="d-flex  align-center">
-          <v-btn :light="dark" :dark="!dark" class="mr-2">
+          <v-btn :light="dark" :dark="!dark" class="mr-2" @click="$emit('next');">
             OK
             <v-icon right>mdi-check</v-icon>
           </v-btn>
-          <p class="text-caption mb-0">press <b>Enter</b>
-          <v-icon small>mdi-arrow-left-bottom</v-icon>
-          </p>
         </div>
       </div>
     </div>
@@ -68,5 +65,9 @@ export default {
 .answer .v-input__slot {
   padding: 10px 0;
 }
-
+@media (max-width: 480px) {
+  .answer{
+  font-size:18px;
+  }
+}
 </style>
