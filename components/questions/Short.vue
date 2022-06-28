@@ -12,12 +12,15 @@
         :placeholder="email?'name@example.com':'Type your answer here...'" 
         class="text-work-san answer"
         :value="value"
+        color="black"
         @input="updateValue($event)"/>
         <div class="d-flex  align-center">
-          <v-btn :light="dark" :dark="!dark" class="mr-2" @click="$emit('next');">
-            OK
-            <v-icon right>mdi-check</v-icon>
-          </v-btn>
+          <Button width="85" class="mt-4" @click="$emit('next');">
+            <div class="d-flex">
+              <p class="mb-0 grey--text text--darken-3">ok</p>
+              <v-icon color="grey darken-3" class="ml-2">mdi-arrow-right-thin</v-icon>
+            </div>
+        </Button>
         </div>
       </div>
     </div>

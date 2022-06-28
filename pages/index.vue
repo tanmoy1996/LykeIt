@@ -4,7 +4,7 @@
     <v-card-text v-if="addNewProduct"
     flat
     class="pa-0">
-    <AddProduct :background="require('@/assets/lightBack.svg')"/>
+    <AddProduct />
     </v-card-text>
     <v-card-text v-else-if="!addNewProduct && !products.length>0"
     flat
@@ -44,7 +44,7 @@
 import AddProduct from "~/components/Wizard.vue";
 import ProductCard from "~/components/ProductCard.vue";
 export default {
-    layout: "InAppLayout",
+    layout: 'LoginLayout',
     components: { AddProduct, ProductCard },
     data() {
         return {

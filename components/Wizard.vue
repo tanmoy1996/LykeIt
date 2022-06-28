@@ -1,60 +1,57 @@
 <template>
-  <v-card flat class=" form-full-screen">
-    <v-img :src="background" class="back">
-      <v-progress-linear 
-      color="grey "
-      height="7"
-      :value="completed()"/>
-      <v-card id="questions" flat class="transparent form-full-screen" >
-        <l-bubble class="q" :dark="dark" no="1" v-model="q6" @next="next(true)"
-          question="Features you like the most?" 
-          required/>
-        <l-mcq class="q" :dark="dark" :keyboardSelect="false" no="5" v-model="q5" @next="next(true)"
-          question="Which feature you use the most in Godial?" 
-          :options="features"
-          multiple
-          required/> 
-          <l-short class="q" :dark="dark" no="1" v-model="q1" @next="next(true)"
-          question="Are you using Godial?"
-          questionDesc="It Godial helping you to getting your Leads?" 
-
-          required/>
-          <l-rating class="q" :dark="dark" no="3" v-model="q3" @next="next(true)"
-          question="How is your expirence using Godial?"
-          />
-          <l-bool class="q" :dark="dark" keyboardSelect no="2" v-model="q2" @next="next(true)"
-          question="Can you let us know your experience using Godial?" 
-
-          required/>
-          <l-range class="q" :dark="dark" no="4" v-model="q4" @next="next(true)"
-          question="On a mark of 1 to 10 how will you rate Godial? 10 being happy and 1 means sad." 
-          range="10"
-          required/>
-          <l-range class="q" :dark="dark" no="4" v-model="q4" @next="next(true)"
-          question="On a mark of 1 to 10 how will you rate Godial? 10 being happy and 1 means sad." 
-          range="50"
-          required/>
-          
-      </v-card>
-    </v-img>
-      <div class="absBtn">
-        <v-btn 
-        :dark="!dark"
-        fab 
-        small 
-        :disabled="step==0"
-        @click="next(false)">
-          <v-icon>mdi-arrow-up-thick</v-icon>
-        </v-btn>
-        <v-btn 
-        :dark="!dark"
-        fab 
-        small 
-        :disabled="step==questionNos-1"
-        @click="next(true)">
-          <v-icon>mdi-arrow-down-thick</v-icon>
-        </v-btn>
-      </div>
+  <v-card tile flat class=" form-full-screen">
+    <!-- <div class="background">
+      <div class="whiteGrad"> -->
+        <v-progress-linear 
+          color="grey "
+          height="7"
+          :value="completed()"/>
+        <v-card id="questions" flat class="transparent form-full-screen" >
+          <!-- <l-bubble class="q" :dark="dark" no="1" v-model="q6" @next="next(true)"
+            question="Features you like the most?" 
+            required/> -->
+            <l-short class="q" :dark="dark" no="1" email v-model="q1" @next="next(true)"
+              question="Please enter your email?"
+              questionDesc="Your response will be stored in our system?" 
+              required/>
+            <l-bool class="q" :dark="dark" keyboardSelect no="2" v-model="q2" @next="next(true)"
+            question="Are you using Godial?" 
+            questionDesc="Godial is a TeleCalling CRM software?" 
+            required/>
+            <l-rating class="q" :dark="dark" no="1" v-model="q3" @next="next(true)"
+            question="How is your expirence using Godial?"/>
+            <l-mcq class="q" :dark="dark" :keyboardSelect="false" no="5" v-model="q5" @next="next(true)"
+              question="Which feature you use the most in Godial?" 
+              :options="features"
+              multiple
+              required/> 
+            <l-range class="q" :dark="dark" no="3" v-model="q4" @next="next(true)"
+            question="By what percentage have godial helped your lead management?"
+            questionDesc="You can select by dragging the thumb" 
+            range="100"
+            required/>
+            
+        </v-card>
+        <div class="absBtn">
+          <v-btn 
+          :dark="!dark"
+          fab 
+          small 
+          :disabled="step==0"
+          @click="next(false)">
+            <v-icon>mdi-arrow-up-thick</v-icon>
+          </v-btn>
+          <v-btn 
+          :dark="!dark"
+          fab 
+          small 
+          :disabled="step==questionNos-1"
+          @click="next(true)">
+            <v-icon>mdi-arrow-down-thick</v-icon>
+          </v-btn>
+        <!-- </div>
+      </div> -->
+    </div>
 
   </v-card>
 </template>
@@ -78,12 +75,13 @@ export default {
             q5:'',
             q6:'',
             features:[
-              { pic:require('@/assets/home.png'), name: 'CRM' },
-              { pic:require('@/assets/home.png'), name: 'Pipeline' },
-              { pic:require('@/assets/home.png'), name: 'Automation' },
-              { pic:require('@/assets/home.png'), name: 'Broadcast Survey' },
-              { pic:require('@/assets/home.png'), name: 'Leaderboard' },
-              { pic:require('@/assets/home.png'), name: 'Forms Integration' }
+              { name: 'CRM' },
+              { name: 'Pipeline' },
+              { name: 'Automation' },
+              { name: 'Broadcast Survey' },
+              { name: 'Leaderboard' },
+              { name: 'Forms Integration' },
+              // { pic:require('@/assets/home.png'), name: 'Forms Integration' }
             ],
             step:0,
             questionNos:5,
@@ -112,6 +110,14 @@ export default {
 </script>
 
 <style scoped>
+.background{
+  background-image: url('@/assets/topo.svg');
+  background-repeat: repeat;
+}
+.whiteGrad{
+  background: rgb(255,255,255);
+  background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 48%, rgba(255,255,255,0) 100%);
+}
 .form-full-screen{
   height: calc(100vh - 88px);
   position: relative;

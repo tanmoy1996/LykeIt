@@ -7,32 +7,20 @@
           <span v-if="required">*</span>
         </p>
         <p class="text-work-san f-20 opacity-50"> {{questionDesc}} </p>
-        <div>
-          <div v-for="(option,idx) of opt"
-          cols="5"
-          :key="idx"
-          class="option pa-0 ma-3"
-          :class="`${selected==idx?'blink':null} option${dark?'Dark':'Light'}`"
-          @click="selectAns(idx)">
-            <v-card outlined class="transparent">
-              <!-- keyboard option -->
-              <div class="d-flex ma-2 mt-3">
-                <v-card v-if="keyboardSelect" flat class="transparent px-2 mr-2 rounded-sm keyboard">
-                  <b class="text-work-san f-16">{{option.charAt(0)}}</b>
-                </v-card>
-                <p class="text-work-san f-16 mb-0">{{option}}</p>
-              </div>
-            </v-card>
-            <div v-if="selected==idx" class="d-flex align-start justify-end selected"
-            :class="dark?'white':'grey darken-4'">
-              <v-icon :color="dark?'black':'white'">mdi-check</v-icon>
-            </div>
-          </div>
+        <div class="mt-10 ">
+          <Button width="200" @click="selectAns(0)">
+            <p class="text-work-san f-16 mb-0">Yes</p>
+          </Button>
+          <Button width="200" @click="selectAns(1)">
+            <p class="text-work-san f-16 mb-0">No</p>
+          </Button>
         </div>
-          <v-btn :light="dark" :dark="!dark" class="mt-3" @click="$emit('next');">
-            OK
-            <v-icon right>mdi-check</v-icon>
-          </v-btn>
+        <Button width="85" @click="$emit('next');">
+          <div class="d-flex">
+            <p class="mb-0 grey--text text--darken-3">ok</p>
+            <v-icon color="grey darken-3" class="ml-2">mdi-arrow-right-thin</v-icon>
+          </div>
+        </Button>
       </div>
     </div>
   </v-card>
@@ -62,7 +50,6 @@ export default {
   data(){
     return{
       selected:-1,
-      opt:['True','False'],
     }
   },
   methods:{
@@ -74,7 +61,7 @@ export default {
         this.selected=idx;
       }
       this.updateValue(this.selected==0)
-      setTimeout(()=>{this.$emit('next')}, 1000);
+      setTimeout(()=>{this.$emit('next')}, 400);
     },
     key(e) {
       if(e.key.toLowerCase()=='t'){
@@ -92,63 +79,7 @@ export default {
 </script>
 
 <style scoped>
-.option{
-  border-radius: 5px;
-  position: relative;
-  min-height:50px;
-  min-width: 15vw;
-  max-width: 20vw;
-  cursor: pointer;
-  transition: all 100ms ease-in-out;
-}
-.optionLight{
-  border: 2px solid rgb(65, 65, 65);
-}
-.optionDark{
-  border: 2px solid white;
-}
-.selected{
-  top:-1px;
-  right:-1px;
-  height:48px;
-  width: 48px;
-  border-radius: 5px;
-  position: absolute;
-  clip-path: polygon(0% 0, 100% 0, 100% 100%);
-}
 .f-16{
   font-size: 16px;
-}
-.blink {
-  animation: blinker 500ms linear 2;
-}
-.keyboard{
-  background: rgba(255, 255, 255, 0.747) !important;
-  color:rgb(24, 24, 24);
-  transition: all 100ms ease-in-out;
-}
-.option:hover{
-  background: rgba(255, 255, 255, 0.205);
-}
-.option:hover .keyboard{
-  background: rgba(255, 255, 255) !important;
-  color:rgb(2, 2, 2);
-}
-@keyframes blinker {
-  0% {
-    border: 2px solid white;
-  }
-  33% {
-    border: 2px solid rgb(54, 54, 54);
-  }
-  66% {
-    border: 2px solid white;
-  }
-}
-
-@media (max-width: 480px) {
-  .option{
-  min-width: 50vw;
-  }
 }
 </style>
