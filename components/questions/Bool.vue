@@ -8,16 +8,16 @@
         </p>
         <p class="text-work-san f-20 opacity-50"> {{questionDesc}} </p>
         <div class="mt-10 ">
-          <Button width="200" @click="selectAns(0)">
+          <Button width="250" height="45" class="mb-5" @click="selectAns(0)">
             <p class="text-work-san f-16 mb-0">Yes</p>
           </Button>
-          <Button width="200" @click="selectAns(1)">
+          <Button width="250" height="45" class="mb-5" @click="selectAns(1)">
             <p class="text-work-san f-16 mb-0">No</p>
           </Button>
         </div>
         <Button width="85" @click="$emit('next');">
           <div class="d-flex">
-            <p class="mb-0 grey--text text--darken-3">ok</p>
+            <p class="mb-0 grey--text text--darken-3 f-16">ok</p>
             <v-icon color="grey darken-3" class="ml-2">mdi-arrow-right-thin</v-icon>
           </div>
         </Button>
@@ -77,9 +77,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.f-16{
-  font-size: 16px;
-}
-</style>

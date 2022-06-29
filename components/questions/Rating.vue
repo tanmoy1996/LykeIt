@@ -15,34 +15,23 @@
             @click="select(idx)">
             <Button width="150" height="110" class="d-sm-block d-none">
               <div class="py-3">
-                <img :src="option.emoji" width="50%"/>
-                <p class="text-work-san f-13 mb-0" v-text="option.name"></p>
+                <div class="d-flex justify-center">
+                  <nuxt-img :src="`/rates/rate${idx+1}.png`" width="70"/>
+                </div>
+                <p class="text-work-san f-13 mb-0 text-center" v-text="option.name"></p>
               </div>
             </Button>
             <Button width="50" height="50" class="d-sm-none d-block">
               <div class="py-3">
-                <img :src="option.emoji" 
-                width="60%" 
-                :class="selected==idx?'no-blur':null"/>
+                <nuxt-img :src="`/rates/rate${idx+1}.png`" width="35"/>
                 <p class="text-work-san f-13 mb-0" v-text="option.name"></p>
               </div>
             </Button>
-            <!-- <v-card outlined class="transparent pt-3">
-              <div class="d-flex ma-2">
-                <v-card v-if="keyboardSelect" flat class="white black--text px-2 mr-2 rounded-sm">
-                  <b class="text-work-san f-16">{{String.fromCharCode(65+idx)}}</b>
-                </v-card>
-              </div>
-            </v-card>
-            <div v-if="selected==idx" class="d-flex align-start justify-end selected"
-            :class="dark?'white':'grey darken-4'">
-              <v-icon :color="dark?'black':'white'">mdi-check</v-icon>
-            </div> -->
           </div>
         </div>
         <Button width="85" class="mt-4">
           <div class="d-flex">
-            <p class="mb-0 grey--text text--darken-3">ok</p>
+            <p class="mb-0 grey--text text--darken-3 f-16">ok</p>
             <v-icon color="grey darken-3" class="ml-2">mdi-arrow-right-thin</v-icon>
           </div>
         </Button>
@@ -61,10 +50,6 @@ export default {
     no: String,
     question: String,
     questionDesc: String,
-    keyboardSelect:{
-      type: Boolean,
-      default: false,
-    },
     dark: {
       type: Boolean,
       default: false,
@@ -78,23 +63,18 @@ export default {
     return{
       selected:-1,
       options:[{
-        emoji:require('@/assets/rates/rate1.png'),
         rate:1,
         name:'Very Unsatisfied'
       },{
-        emoji:require('@/assets/rates/rate2.png'),
         rate:2,
         name:'Slightly Unsatisfied'
       },{
-        emoji:require('@/assets/rates/rate3.png'),
         rate:3,
         name:'Neutral'
       },{
-        emoji:require('@/assets/rates/rate4.png'),
         rate:4,
         name:'Satisfied'
       },{
-        emoji:require('@/assets/rates/rate5.png'),
         rate:5,
         name:'Extremely Satisfied'
       }]

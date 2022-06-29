@@ -1,7 +1,7 @@
 <template>
   <v-card tile flat class=" form-full-screen">
-    <!-- <div class="background">
-      <div class="whiteGrad"> -->
+    <div class="background">
+      <div class="whiteGrad">
         <v-progress-linear 
           color="grey "
           height="7"
@@ -10,6 +10,8 @@
           <!-- <l-bubble class="q" :dark="dark" no="1" v-model="q6" @next="next(true)"
             question="Features you like the most?" 
             required/> -->
+            <l-rating class="q" :dark="dark" no="1" v-model="q3" @next="next(true)"
+            question="How is your expirence using Godial?"/>
             <l-short class="q" :dark="dark" no="1" email v-model="q1" @next="next(true)"
               question="Please enter your email?"
               questionDesc="Your response will be stored in our system?" 
@@ -18,8 +20,7 @@
             question="Are you using Godial?" 
             questionDesc="Godial is a TeleCalling CRM software?" 
             required/>
-            <l-rating class="q" :dark="dark" no="1" v-model="q3" @next="next(true)"
-            question="How is your expirence using Godial?"/>
+            
             <l-mcq class="q" :dark="dark" :keyboardSelect="false" no="5" v-model="q5" @next="next(true)"
               question="Which feature you use the most in Godial?" 
               :options="features"
@@ -52,7 +53,8 @@
         <!-- </div>
       </div> -->
     </div>
-
+  </div>
+  </div>
   </v-card>
 </template>
 

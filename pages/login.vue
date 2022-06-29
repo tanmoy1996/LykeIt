@@ -1,69 +1,79 @@
 <template>
   <v-card tile flat 
   height="100vh" 
-  class="blue lighten-4 d-flex justify-center align-center">
-    <v-card tile elevation="12"
-    class="card overflow-hidden">
-      <v-row class="no-gutters fill-height">
+  class="d-flex justify-center align-center">
+    <v-row class="no-gutters fill-height">
+      <v-col cols md="6" class="d-flex align-center">
+          <nuxt-img
+          width="700"
+          class="rot-20"
+          src="/login-img.jpg" alt="Login Pic"/>
+        </v-col>
         <v-col cols md="6">
-          <v-card flat >
-            <v-card-title>
-              <div class="decoration grad"></div>
-              <h3>LYKE IT</h3>
-            </v-card-title>
+          <v-card flat class="pa-12">
             <v-card-text class="pb-0">
-              <p class="welcome blue--text text--darken-4">welcome back</p>
-              <p class="welcome--desc">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, quae. Voluptas, vitae eligendi</p>
+              <h1 class="text-work-san f-32">welcome back</h1>
+              <p class="mt-3 f-20">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, quae. Voluptas, vitae eligendi</p>
             </v-card-text>
-            <v-card-text >
-              <v-text-field
-                v-model="login.username"
-                solo
-                prepend-inner-icon="mdi-account"
-                label="User Name / Email"/>
-              <v-text-field
-                v-model="login.password"
-                solo
-                prepend-inner-icon="mdi-lock"
-                :append-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
-                :type="visible ? 'text' : 'password'"
-                @click:append="() => (visible = !visible)"
-                label="Password"/>
+            <v-card-text>
+              <Button width="500" height="50">
+                <v-text-field
+                  solo
+                  flat
+                  dense
+                  hide-details
+                  color="black"
+                  label="User Name / Email"
+                  prepend-inner-icon="mdi-account"
+                  />
+              </Button>
+              <Button width="500" height="50" class="mt-5">
+                <v-text-field
+                  solo
+                  flat
+                  dense
+                  hide-details
+                  color="black"
+                  prepend-inner-icon="mdi-lock"
+                  :append-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="visible ? 'text' : 'password'"
+                  @click:append="() => (visible = !visible)"
+                  label="Password"
+                  />
+              </Button>
             </v-card-text>
-            <v-card-actions class="d-block">
-              <div>
-                <v-btn text small class="my-2"
-                  >Forgot Password</v-btn>
-              </div>
-              <v-btn tile dark class="mx-1 grad">Login</v-btn>
-              <v-btn tile dark class="mx-1 grad">Create Account</v-btn>
+            <v-btn text small class="my-2"
+              >Forgot Password</v-btn>
+            <v-card-actions>
+              <Button width="100">
+                <p class="mb-0">Login</p>
+              </Button>
+              <Button width="200">
+                <p class="mb-0">Create Account</p>
+              </Button>
             </v-card-actions>
           </v-card>
         </v-col>
-        <v-col cols md="6">
-          <v-img
-          height="100%"
-          width="auto"
-          :src="require('../assets/bluepic.jpeg')" alt="Blue Image"/>
-        </v-col>
+        
       </v-row>
-    </v-card>
   </v-card>
       
 </template>
 
 <script>
+import Button from '~/components/Button.vue'
 export default {
-  layout: 'LoginLayout',
-  data(){
-    return {
-      visible:false,
-      login:{
-        username:'',
-        password:''
-      }
-    }
-  }
+    layout: "LoginLayout",
+    data() {
+        return {
+            visible: false,
+            login: {
+                username: "",
+                password: ""
+            }
+        };
+    },
+    components: { Button }
 }
 </script>
 
@@ -227,7 +237,7 @@ export default {
       </v-flex>
     </v-row>
 
-    <!-- forgot password dialog -->
+    !-- forgot password dialog --
     <v-dialog v-model="forgotPasswordDisplay" width="400" persistent>
       <v-card class="mx-auto">
         <v-card-title class="primarygrad">
@@ -263,7 +273,7 @@ export default {
       </v-card>
     </v-dialog>
 
-    <!-- loader -->
+    !-- loader --
     <v-dialog v-model="dialog" persistent width="300">
       <v-card color="primarygrad white--text" dark>
         <v-card-text>
@@ -277,7 +287,7 @@ export default {
       </v-card>
     </v-dialog>
 
-    <!-- signup page -->
+    !-- signup page --
     <v-dialog v-model="signupDialog" max-width="600" persistent>
       <v-card elevation="0">
         <v-card-title class="primary">

@@ -1,11 +1,36 @@
 <template>
-  <v-app >
-    <Navbar :drawer="drawer"/>
-    <v-app-bar fixed app flat class="blue lighten-5">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title class="text-dec" v-text="title" />
-    </v-app-bar>
-    <v-main class="blue lighten-5">
+  <v-app>
+    <v-main>
+      <v-app-bar
+        flat
+        class="transparent"
+        hide-on-scroll>
+        <h2 >tap</h2>
+        <Button width="45" height="35">
+          <h2 class="f-16">lyk</h2>
+        </Button>
+        <v-spacer></v-spacer>
+        <div class="d-none d-md-flex">
+          <Button width="250" height="42" class="mx-2">
+            <v-text-field
+              solo
+              flat
+              dense
+              hide-details
+              color="black"
+              label="Search Product"
+              prepend-inner-icon="mdi-magnify"
+              />
+          </Button>
+          <v-avatar>
+            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="Profile Pic">
+          </v-avatar>
+        </div>
+        <!-- menu -->
+        <v-btn icon class="d-flex d-md-none">
+          <v-icon>mdi-menu</v-icon>
+        </v-btn>
+      </v-app-bar>
       <v-container fluid class="my-0">
         <Nuxt />
       </v-container>
@@ -14,25 +39,20 @@
 </template>
 
 <script>
-import Navbar from '~/components/Navbar.vue'
+import Button from '~/components/Button.vue';
 export default {
     name: "InAppLayout",
+    components: { Button },
     data() {
-      return {
-        drawer:true,
-        title: "Dashboard",
-        
-      };
+        return {
+            name: "AV Avijit",
+        };
     },
-    components: { Navbar }
+    
 }
 </script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
-  .grad{
-    background-image: linear-gradient(122deg, rgba(2,0,36,1) 0%, rgba(9,9,116,1) 61%, rgba(17,91,205,1) 100%);
-  }
   .full-screen{
     min-height: calc(100vh - 88px);
   }
@@ -45,6 +65,9 @@ export default {
   .f-20{
     font-size:20px;
   }
+  .f-32{
+  font-size: 32px;
+  }
   .opacity-50{
     opacity: 0.5;
   }
@@ -53,9 +76,7 @@ export default {
   }
 </style>
 <style scoped>
-.text-dec{
-  font-family: 'Berkshire Swash', cursive;
-  font-size: 32px;
+.li-search-width{
+  width:300px;
 }
-
 </style>

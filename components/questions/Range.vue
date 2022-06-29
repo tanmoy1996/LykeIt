@@ -27,7 +27,7 @@
             @change="updateValue($event)"/>
           <Button width="85" class="mt-4" @click="$emit('next');">
             <div class="d-flex">
-              <p class="mb-0 grey--text text--darken-3">ok</p>
+              <p class="mb-0 grey--text text--darken-3 f-16">ok</p>
               <v-icon color="grey darken-3" class="ml-2">mdi-arrow-right-thin</v-icon>
             </div>
         </Button>

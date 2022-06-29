@@ -1,5 +1,5 @@
 <template>
-  <button 
+  <div 
   v-on="$listeners"
   :style="`width:${width}px; height:${height}px`"
   class="l-btn ma-1 rounded">
@@ -9,11 +9,12 @@
     <span 
     :style="`width:${width}px; height:${height}px`"
     class="l-btn-base d-flex rounded"></span>
-    <span 
+    <div 
     :style="`width:${width}px; height:${height}px`"
-    class="l-btn-top d-flex align-center justify-center 
-    text-work-san f-16 rounded"><slot/></span>
-  </button>
+    class="l-btn-top d-flex align-center justify-center rounded">
+      <slot></slot>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -74,8 +75,6 @@ export default {
   top:0;
   left:0;
   border-radius: 12px;
-  font-size: 1.25rem;
-  color:rgb(32, 32, 32);
   border:2px solid rgb(88, 88, 88);
   background: white;
   will-change: transform;

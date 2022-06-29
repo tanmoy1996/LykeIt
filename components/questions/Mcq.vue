@@ -13,7 +13,7 @@
           <Button width="200" :height="option.pic?'150':'50'">
                 <div>
                   <img v-if="option.pic" :src="option.pic" width="60%"/>
-                  <p class="text-work-san f-16 mb-0" v-text="option.name"></p>  
+                  <p class="text-work-san f-18 mb-0" v-text="option.name"></p>  
                   <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)"
                     class="d-flex align-start justify-end selected" :class="dark?'white':'grey darken-4'">
                     <v-icon :color="dark?'black':'white'">mdi-check</v-icon>
@@ -28,7 +28,7 @@
           <Button width="180" :height="option.pic?'145':'50'">
                 <div>
                   <img v-if="option.pic" :src="option.pic" width="60%"/>
-                  <p class="text-work-san f-16 mb-0" v-text="option.name"></p>  
+                  <p class="text-work-san f-18 mb-0" v-text="option.name"></p>  
                   <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)"
                     class="d-flex align-start justify-end selected" :class="dark?'white':'grey darken-4'">
                     <v-icon :color="dark?'black':'white'">mdi-check</v-icon>
@@ -43,7 +43,7 @@
           <Button width="250" :height="option.pic?'145':'50'">
                 <div>
                   <img v-if="option.pic" :src="option.pic" width="60%"/>
-                  <p class="text-work-san f-16 mb-0" v-text="option.name"></p>  
+                  <p class="text-work-san f-18 mb-0" v-text="option.name"></p>  
                   <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)"
                     class="d-flex align-start justify-end selected" :class="dark?'white':'grey darken-4'">
                     <v-icon :color="dark?'black':'white'">mdi-check</v-icon>
@@ -58,7 +58,7 @@
           <Button width="140" :height="option.pic?'145':'50'">
                 <div>
                   <img v-if="option.pic" :src="option.pic" width="60%"/>
-                  <p class="text-work-san f-16 mb-0" v-text="option.name"></p>  
+                  <p class="text-work-san f-18 mb-0" v-text="option.name"></p>  
                   <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)"
                     class="d-flex align-start justify-end selected" :class="dark?'white':'grey darken-4'">
                     <v-icon :color="dark?'black':'white'">mdi-check</v-icon>
@@ -80,9 +80,9 @@
               </div>
               <div class="d-flex ma-2">
                 <v-card v-if="keyboardSelect" flat class="white black--text px-2 mr-2 rounded-sm">
-                  <b class="text-work-san f-16">{{String.fromCharCode(65+idx)}}</b>
+                  <b class="text-work-san f-18">{{String.fromCharCode(65+idx)}}</b>
                 </v-card>
-                <p class="text-work-san f-16 mb-0" v-text="option.name"></p>
+                <p class="text-work-san f-18 mb-0" v-text="option.name"></p>
               </div>
             </v-card>
             <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)"
@@ -104,9 +104,9 @@
               </div>
               <div class="d-flex ma-2">
                 <v-card v-if="keyboardSelect" flat class="white black--text px-2 mr-2 rounded-sm">
-                  <b class="text-work-san f-16">{{String.fromCharCode(65+idx)}}</b>
+                  <b class="text-work-san f-18">{{String.fromCharCode(65+idx)}}</b>
                 </v-card>
-                <p class="text-work-san f-16 mb-0" v-text="option.name"></p>
+                <p class="text-work-san f-18 mb-0" v-text="option.name"></p>
               </div>
             </v-card>
             <div v-if="(multiple && selected.includes(idx))||(!multiple && singleSelect==idx)" 
@@ -129,7 +129,7 @@
         
         <Button width="85" class="mt-4" @click="$emit('next');">
           <div class="d-flex">
-            <p class="mb-0 grey--text text--darken-3">ok</p>
+            <p class="mb-0 grey--text text--darken-3 f-16">ok</p>
             <v-icon color="grey darken-3" class="ml-2">mdi-arrow-right-thin</v-icon>
           </div>
         </Button>
@@ -221,7 +221,7 @@ export default {
   position: absolute;
   clip-path: polygon(0% 0, 100% 0, 100% 100%);
 }
-.f-16{
+.f-18{
   font-size: 18px;
   line-height: 1;
 }
@@ -230,7 +230,7 @@ export default {
   .answer{
   font-size:16px;
   }
-  .f-16{
+  .f-18{
   font-size:14px;
   }
 }
